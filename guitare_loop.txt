@@ -1,0 +1,44 @@
+live_loop :drums do
+  sample :bd_haus
+  sleep 0.5
+end
+
+
+
+
+# stuff for :guitare_loop
+use_synth(:pluck)
+riff1 = [65, 67, 63, 70, 60, :r, :r].ring
+riff2 = [72, 65, 67, 63, 70, :r, :r].ring
+riff3 = [65, 60, 67, 70, 55, :r, :r].ring
+riff4 = [65, 60, 55, 65, 70, :r, :r].ring
+riff1_rev = riff1.take(5).mirror
+
+default_release_time=3
+default_sleep_time=0.4
+
+#
+live_loop :guitare_loop do
+  
+  2.times do
+    
+    7.times do
+      play riff1.tick , release: default_release_time
+      sleep default_sleep_time
+    end
+    
+    7.times do
+      play riff2.tick, release: default_release_time
+      sleep default_sleep_time
+    end
+  end
+  14.times do
+    play riff3.tick, release: default_release_time
+    sleep default_sleep_time
+  end
+  
+  7.times do
+    play riff4.tick, release: default_release_time
+    sleep default_sleep_time
+  end
+end

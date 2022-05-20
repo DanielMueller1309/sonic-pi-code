@@ -1,0 +1,16 @@
+live_loop :riff do
+  use_synth :pluck
+  #riff = (ring :e3, :r, :e3, :r, :g3, :r, :r, :r, :a3)
+ #1.times do
+ #  play :e3
+ #  sleep 0.5
+ #  play :e3
+ #  sleep 0.5
+ #  play :e3
+ #  sleep 0.25
+ #  play :g3
+ #  #play riff.tick, release: 1.5
+ #  sleep 0.25
+  end
+  sleep 1
+end
