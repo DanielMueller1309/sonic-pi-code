@@ -1,0 +1,77 @@
+use_synth(:pluck)
+scale_riff = (scale :c3, :minor_pentatonic, num_octaves: 1)
+riff      = [48, 51, 55].ring
+riff2     = [60, 62, 58, 62].ring
+riff_high = [47, 50, 52, 57, 54].ring
+
+define :bass do
+  20.times do
+    sample :bd_haus, amp: 0.1
+    sleep 0.4
+  endq
+  10.times do
+    sample :bd_haus, amp: 0.1
+    sleep 0.2
+  end
+  
+  in_thread do
+    in_thread do
+      10.times do
+        sample :ambi_piano , amp: 0.3
+        sleep 1.6
+      end
+    end
+    10.times do
+      sample :bd_haus, amp: 0.1
+      sleep 0.4
+    end
+  end
+  sleep 7.2
+  5.times do
+    sample :sn_dolf, amp: 0.3
+    sleep 0.8
+  end
+end
+
+define :snare do
+  10.times do
+    sample :sn_dolf, amp: 0.3
+    sleep 1.6
+  end
+end
+define :guitare2 do
+  1.times do
+    play_pattern_timed riff_high.take(3), 0.2, release: 0.8
+    sleep 0.2
+  end
+  1.times do
+    play_pattern_timed riff.take(3), 0.2, release: 0.8
+    sleep 0.2
+  end
+  #play_pattern_timed riff, 0.3, release: 1
+  #sleep 0.25
+  # ich stehe jeden morgen auf und frage mich warum
+  # bin ich doch viel zu müde und zugleich auch noch so dum
+  #play_pattern_timed riff2.reverse, 0.28, release: 0.5
+  #play_pattern_timed scale_riff, 0.25, release: 0.5
+  #play_pattern_timed riff2, 0.25, release: 0.5
+  
+  #play_pattern_timed riff2, 0.28, release: 0.5
+end
+
+in_thread do
+  
+  live_loop :base_line do
+    in_thread do
+      bass
+    end
+    sleep 4
+    snare
+    
+  end
+  
+end
+
+sleep 24.4
+#guitare2
+
